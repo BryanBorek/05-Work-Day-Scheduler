@@ -47,7 +47,7 @@ var hourArray = [{
         hourArray = savedTodos;
     }
 
-    // Update text area background in real time if hour changes
+    // check every 10 minutes to update text area background in real time if hour changes
     function checkHour() {
         if(currentHour != moment().format('HH')) {
             for (var i = 0; i < hourArray.length; i++) {
@@ -101,120 +101,130 @@ for (var i = 0; i <hourArray.length; i++) {
     hourRow.append(hourBtnEl);
     hourListEl.append(hourRow);
     
+    var btnHit = 0;
+
     // Testing new way to make btns work without setting each manually
-    // $("[id=btn" + hourArray[i].hour + "]").on('click', function(event){
+    $("[id=btn" + hourArray[i].hour + "]").on('click', function(event){
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        console.log('hit' + 'btn' + this.id);
+        btnHit = this.id.replace('b','').replace('t','').replace('n','');
+        console.log('you hit button ' + btnHit)
+
+        hourArray[btnHit - 8].todo = $("[id=" + btnHit + "]").val();
+        $("[id=" + btnHit + "]").val(hourArray[btnHit - 8].todo);
+
+        localStorage.setItem('saveTodos', JSON.stringify(hourArray));
+        savedTodos = $(JSON.parse(localStorage.getItem('saveTodos')));
+    });
+
+    // $("[id=btn08]").on('click', function(event){ 
     //     event.stopPropagation();
     //     event.stopImmediatePropagation();
-    //     console.log('works');
+
+    //     hourArray[0].todo = $("[id=08]").val();
+    //     $("[id=08]").val(hourArray[0].todo);
+
+    //     localStorage.setItem('saveTodos', JSON.stringify(hourArray));
+    //     savedTodos = $(JSON.parse(localStorage.getItem('saveTodos')));
     // });
 
-    $("[id=btn08]").on('click', function(event){ 
-        event.stopPropagation();
-        event.stopImmediatePropagation();
+    // $("[id=btn09]").on('click', function(event){
+    //     event.stopPropagation();
+    //     event.stopImmediatePropagation();
 
-        hourArray[0].todo = $("[id=08]").val();
-        $("[id=08]").val(hourArray[0].todo);
+    //     hourArray[1].todo = $("[id=09]").val();
+    //     $("[id=09]").val(hourArray[1].todo);
 
-        localStorage.setItem('saveTodos', JSON.stringify(hourArray));
-        savedTodos = $(JSON.parse(localStorage.getItem('saveTodos')));
-    });
-    
-    $("[id=btn09]").on('click', function(event){
-        event.stopPropagation();
-        event.stopImmediatePropagation();
+    //     localStorage.setItem('saveTodos', JSON.stringify(hourArray));
+    //     savedTodos = $(JSON.parse(localStorage.getItem('saveTodos')));
+    // });
 
-        hourArray[1].todo = $("[id=09]").val();
-        $("[id=09]").val(hourArray[1].todo);
+    // $("[id=btn10]").on('click', function(event){
+    //     event.stopPropagation();
+    //     event.stopImmediatePropagation();
 
-        localStorage.setItem('saveTodos', JSON.stringify(hourArray));
-        savedTodos = $(JSON.parse(localStorage.getItem('saveTodos')));
-    });
+    //     hourArray[2].todo = $("[id=10]").val();
+    //     $("[id=10]").val(hourArray[2].todo);
 
-    $("[id=btn10]").on('click', function(event){
-        event.stopPropagation();
-        event.stopImmediatePropagation();
+    //     localStorage.setItem('saveTodos', JSON.stringify(hourArray));
+    //     savedTodos = $(JSON.parse(localStorage.getItem('saveTodos')));
+    // });
 
-        hourArray[2].todo = $("[id=10]").val();
-        $("[id=10]").val(hourArray[2].todo);
+    // $("[id=btn11]").on('click', function(event){
+    //     event.stopPropagation();
+    //     event.stopImmediatePropagation();
 
-        localStorage.setItem('saveTodos', JSON.stringify(hourArray));
-        savedTodos = $(JSON.parse(localStorage.getItem('saveTodos')));
-    });
+    //     hourArray[3].todo = $("[id=11]").val();
+    //     $("[id=11]").val(hourArray[3].todo);
 
-    $("[id=btn11]").on('click', function(event){
-        event.stopPropagation();
-        event.stopImmediatePropagation();
+    //     localStorage.setItem('saveTodos', JSON.stringify(hourArray));
+    //     savedTodos = $(JSON.parse(localStorage.getItem('saveTodos')));
+    // });
 
-        hourArray[3].todo = $("[id=11]").val();
-        $("[id=11]").val(hourArray[3].todo);
+    // $("[id=btn12]").on('click', function(event){
+    //     event.stopPropagation();
+    //     event.stopImmediatePropagation();
 
-        localStorage.setItem('saveTodos', JSON.stringify(hourArray));
-        savedTodos = $(JSON.parse(localStorage.getItem('saveTodos')));
-    });
+    //     hourArray[4].todo = $("[id=12]").val();
+    //     $("[id=12]").val(hourArray[4].todo);
 
-    $("[id=btn12]").on('click', function(event){
-        event.stopPropagation();
-        event.stopImmediatePropagation();
+    //     localStorage.setItem('saveTodos', JSON.stringify(hourArray));
+    //     savedTodos = $(JSON.parse(localStorage.getItem('saveTodos')));
+    // });
 
-        hourArray[4].todo = $("[id=12]").val();
-        $("[id=12]").val(hourArray[4].todo);
+    // $("[id=btn13]").on('click', function(event){
+    //     event.stopPropagation();
+    //     event.stopImmediatePropagation();
 
-        localStorage.setItem('saveTodos', JSON.stringify(hourArray));
-        savedTodos = $(JSON.parse(localStorage.getItem('saveTodos')));
-    });
+    //     hourArray[5].todo = $("[id=13]").val();
+    //     $("[id=13]").val(hourArray[5].todo);
 
-    $("[id=btn13]").on('click', function(event){
-        event.stopPropagation();
-        event.stopImmediatePropagation();
+    //     localStorage.setItem('saveTodos', JSON.stringify(hourArray));
+    //     savedTodos = $(JSON.parse(localStorage.getItem('saveTodos')));
+    // });
 
-        hourArray[5].todo = $("[id=13]").val();
-        $("[id=13]").val(hourArray[5].todo);
+    // $("[id=btn14]").on('click', function(event){
+    //     event.stopPropagation();
+    //     event.stopImmediatePropagation();
 
-        localStorage.setItem('saveTodos', JSON.stringify(hourArray));
-        savedTodos = $(JSON.parse(localStorage.getItem('saveTodos')));
-    });
+    //     hourArray[6].todo = $("[id=14]").val();
+    //     $("[id=14]").val(hourArray[6].todo);
 
-    $("[id=btn14]").on('click', function(event){
-        event.stopPropagation();
-        event.stopImmediatePropagation();
+    //     localStorage.setItem('saveTodos', JSON.stringify(hourArray));
+    //     savedTodos = $(JSON.parse(localStorage.getItem('saveTodos')));
+    // });
 
-        hourArray[6].todo = $("[id=14]").val();
-        $("[id=14]").val(hourArray[6].todo);
+    // $("[id=btn15]").on('click', function(event){
+    //     event.stopPropagation();
+    //     event.stopImmediatePropagation();
 
-        localStorage.setItem('saveTodos', JSON.stringify(hourArray));
-        savedTodos = $(JSON.parse(localStorage.getItem('saveTodos')));
-    });
+    //     hourArray[7].todo = $("[id=15]").val();
+    //     $("[id=15]").val(hourArray[7].todo);
 
-    $("[id=btn15]").on('click', function(event){
-        event.stopPropagation();
-        event.stopImmediatePropagation();
+    //     localStorage.setItem('saveTodos', JSON.stringify(hourArray));
+    //     savedTodos = $(JSON.parse(localStorage.getItem('saveTodos')));
+    // });
 
-        hourArray[7].todo = $("[id=15]").val();
-        $("[id=15]").val(hourArray[7].todo);
+    // $("[id=btn16]").on('click', function(event){
+    //     event.stopPropagation();
+    //     event.stopImmediatePropagation();
 
-        localStorage.setItem('saveTodos', JSON.stringify(hourArray));
-        savedTodos = $(JSON.parse(localStorage.getItem('saveTodos')));
-    });
+    //     hourArray[8].todo = $("[id=16]").val();
+    //     $("[id=16]").val(hourArray[8].todo);
 
-    $("[id=btn16]").on('click', function(event){
-        event.stopPropagation();
-        event.stopImmediatePropagation();
+    //     localStorage.setItem('saveTodos', JSON.stringify(hourArray));
+    //     savedTodos = $(JSON.parse(localStorage.getItem('saveTodos')));
+    // });
 
-        hourArray[8].todo = $("[id=16]").val();
-        $("[id=16]").val(hourArray[8].todo);
+    // $("[id=btn17]").on('click', function(event){
+    //     event.stopPropagation();
+    //     event.stopImmediatePropagation();
 
-        localStorage.setItem('saveTodos', JSON.stringify(hourArray));
-        savedTodos = $(JSON.parse(localStorage.getItem('saveTodos')));
-    });
+    //     hourArray[9].todo = $("[id=17]").val();
+    //     $("[id=17]").val(hourArray[9].todo);
 
-    $("[id=btn17]").on('click', function(event){
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-
-        hourArray[9].todo = $("[id=17]").val();
-        $("[id=17]").val(hourArray[9].todo);
-
-        localStorage.setItem('saveTodos', JSON.stringify(hourArray));
-        savedTodos = $(JSON.parse(localStorage.getItem('saveTodos')));
-    });
+    //     localStorage.setItem('saveTodos', JSON.stringify(hourArray));
+    //     savedTodos = $(JSON.parse(localStorage.getItem('saveTodos')));
+    // });
 }
