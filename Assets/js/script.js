@@ -77,13 +77,14 @@ for (var i = 0; i <hourArray.length; i++) {
     hourBtnEl = $('<button>');
     hourTitle = $('<h3>');
 
-    hourRow.addClass('row my-.5');
+    hourRow.addClass('row justify-content-center my-.5');
     hourTitle.text(hourArray[i].hour + ':00');
     hourTitle.addClass('col-2 hour text-right pt-4');
-    hourInputEL.addClass('textArea col-9');
+    hourInputEL.addClass('textarea col-8');
     hourInputEL.attr('id', hourArray[i].hour.toString());
     hourInputEL.text(hourArray[i].todo);
 
+    //add initial colors on load
     if (hourArray[i].hour.toString() > currentHour) {
         hourInputEL.addClass('future');
     } else if (hourArray[i].hour.toString() < currentHour){
@@ -95,136 +96,23 @@ for (var i = 0; i <hourArray.length; i++) {
     hourBtnEl.addClass('h-100 col-1 saveBtn');
     hourBtnEl.attr('id', 'btn' + hourArray[i].hour);
     hourBtnEl.append('<i class="fas fa-save"></i>');
-
     hourRow.append(hourTitle);
     hourRow.append(hourInputEL);
     hourRow.append(hourBtnEl);
     hourListEl.append(hourRow);
-    
+
+    // Testing new way to make btns work without setting each manually. IT WORKED! Eliminated the neeed for over 100 lines of code
     var btnHit = 0;
 
-    // Testing new way to make btns work without setting each manually
     $("[id=btn" + hourArray[i].hour + "]").on('click', function(event){
         event.stopPropagation();
         event.stopImmediatePropagation();
-        console.log('hit' + 'btn' + this.id);
-        btnHit = this.id.replace('b','').replace('t','').replace('n','');
-        console.log('you hit button ' + btnHit)
 
+        btnHit = this.id.replace('b','').replace('t','').replace('n','');
         hourArray[btnHit - 8].todo = $("[id=" + btnHit + "]").val();
         $("[id=" + btnHit + "]").val(hourArray[btnHit - 8].todo);
 
         localStorage.setItem('saveTodos', JSON.stringify(hourArray));
         savedTodos = $(JSON.parse(localStorage.getItem('saveTodos')));
     });
-
-    // $("[id=btn08]").on('click', function(event){ 
-    //     event.stopPropagation();
-    //     event.stopImmediatePropagation();
-
-    //     hourArray[0].todo = $("[id=08]").val();
-    //     $("[id=08]").val(hourArray[0].todo);
-
-    //     localStorage.setItem('saveTodos', JSON.stringify(hourArray));
-    //     savedTodos = $(JSON.parse(localStorage.getItem('saveTodos')));
-    // });
-
-    // $("[id=btn09]").on('click', function(event){
-    //     event.stopPropagation();
-    //     event.stopImmediatePropagation();
-
-    //     hourArray[1].todo = $("[id=09]").val();
-    //     $("[id=09]").val(hourArray[1].todo);
-
-    //     localStorage.setItem('saveTodos', JSON.stringify(hourArray));
-    //     savedTodos = $(JSON.parse(localStorage.getItem('saveTodos')));
-    // });
-
-    // $("[id=btn10]").on('click', function(event){
-    //     event.stopPropagation();
-    //     event.stopImmediatePropagation();
-
-    //     hourArray[2].todo = $("[id=10]").val();
-    //     $("[id=10]").val(hourArray[2].todo);
-
-    //     localStorage.setItem('saveTodos', JSON.stringify(hourArray));
-    //     savedTodos = $(JSON.parse(localStorage.getItem('saveTodos')));
-    // });
-
-    // $("[id=btn11]").on('click', function(event){
-    //     event.stopPropagation();
-    //     event.stopImmediatePropagation();
-
-    //     hourArray[3].todo = $("[id=11]").val();
-    //     $("[id=11]").val(hourArray[3].todo);
-
-    //     localStorage.setItem('saveTodos', JSON.stringify(hourArray));
-    //     savedTodos = $(JSON.parse(localStorage.getItem('saveTodos')));
-    // });
-
-    // $("[id=btn12]").on('click', function(event){
-    //     event.stopPropagation();
-    //     event.stopImmediatePropagation();
-
-    //     hourArray[4].todo = $("[id=12]").val();
-    //     $("[id=12]").val(hourArray[4].todo);
-
-    //     localStorage.setItem('saveTodos', JSON.stringify(hourArray));
-    //     savedTodos = $(JSON.parse(localStorage.getItem('saveTodos')));
-    // });
-
-    // $("[id=btn13]").on('click', function(event){
-    //     event.stopPropagation();
-    //     event.stopImmediatePropagation();
-
-    //     hourArray[5].todo = $("[id=13]").val();
-    //     $("[id=13]").val(hourArray[5].todo);
-
-    //     localStorage.setItem('saveTodos', JSON.stringify(hourArray));
-    //     savedTodos = $(JSON.parse(localStorage.getItem('saveTodos')));
-    // });
-
-    // $("[id=btn14]").on('click', function(event){
-    //     event.stopPropagation();
-    //     event.stopImmediatePropagation();
-
-    //     hourArray[6].todo = $("[id=14]").val();
-    //     $("[id=14]").val(hourArray[6].todo);
-
-    //     localStorage.setItem('saveTodos', JSON.stringify(hourArray));
-    //     savedTodos = $(JSON.parse(localStorage.getItem('saveTodos')));
-    // });
-
-    // $("[id=btn15]").on('click', function(event){
-    //     event.stopPropagation();
-    //     event.stopImmediatePropagation();
-
-    //     hourArray[7].todo = $("[id=15]").val();
-    //     $("[id=15]").val(hourArray[7].todo);
-
-    //     localStorage.setItem('saveTodos', JSON.stringify(hourArray));
-    //     savedTodos = $(JSON.parse(localStorage.getItem('saveTodos')));
-    // });
-
-    // $("[id=btn16]").on('click', function(event){
-    //     event.stopPropagation();
-    //     event.stopImmediatePropagation();
-
-    //     hourArray[8].todo = $("[id=16]").val();
-    //     $("[id=16]").val(hourArray[8].todo);
-
-    //     localStorage.setItem('saveTodos', JSON.stringify(hourArray));
-    //     savedTodos = $(JSON.parse(localStorage.getItem('saveTodos')));
-    // });
-
-    // $("[id=btn17]").on('click', function(event){
-    //     event.stopPropagation();
-    //     event.stopImmediatePropagation();
-
-    //     hourArray[9].todo = $("[id=17]").val();
-    //     $("[id=17]").val(hourArray[9].todo);
-
-    //     localStorage.setItem('saveTodos', JSON.stringify(hourArray));
-    //     savedTodos = $(JSON.parse(localStorage.getItem('saveTodos')));
-    // });
 }
