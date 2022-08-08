@@ -21,4 +21,4 @@ This day scheduler is equiped with:
 
 Github repository link: https://github.com/BryanBorek/05-Work-Day-Scheduler
 
-Link to deployed site: 
+Link to deployed site: https://bryanborek.github.io/05-Work-Day-Scheduler/
